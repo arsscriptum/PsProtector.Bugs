@@ -108,3 +108,21 @@ When the file is loaded by the server, it will download the FULL PSM1 file and p
 2) Once you receive the Dll, Import the module and witness all the code included in it.
 
 
+## Issue 3 - A bug is letting clients bypass the 200 characters limit in DEMO mode.
+
+### **SEVERITY** _Major: Bug capable of disabling parts of the system_ 
+### SCOPE - EVERYONE USING DEMO MODE
+
+Importance: minimum. It's not a huge issue because of the low probability of it to happen. But if it does happen, the repercussion are quite big. 
+Given that the fix is really simple, it was my opinion to raise this issue.
+
+### DETAILS
+
+Obviously, the DEMO account has write access to the //Input and //Output folder. The issue is that it also has the right to DELETE those folders.
+When either of those are deleted by the DEMO account, all the other users using the DEMO account will receive an error when attempting a Module conversion.
+
+The Erro is FTP 550 (on upload of files to the folders...) Effectively breaking the service for everyone in DEMO mode.
+
+#### Solution 
+
+Have the folders owned by ROOT/ADMIN. They can be writable by all but cannot be deleted except by the ADMIN...
